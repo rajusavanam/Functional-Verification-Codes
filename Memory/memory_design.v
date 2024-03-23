@@ -29,7 +29,7 @@ input [ADDRESS_WIDTH-1:0]addr_i;
 input [MEMORY_WIDTH-1:0]wdata_i;
 output reg ready_o;
 output reg [MEMORY_WIDTH-1:0]rdata_o;
-
+//vommrn
 reg [MEMORY_WIDTH-1:0]mem[MEMORY_DEPTH-1:0]; // This is        declaration for memory size.
 integer i; // Integer used in for loop to iterate through "mem"
 
