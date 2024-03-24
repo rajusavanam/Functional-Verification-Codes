@@ -1,0 +1,361 @@
+Step 1:	Get the memory design, assertion and mem_intfc files which are developed during SV testbench development
+
+Step 2:	Now start developing all the class components, interfaces and top module
+		-> Developing UVM testbench requires UVM source file which contains all the base classes, macros, resource files, etc.
+		-> In list.svh file, include uvm_pkg.sv file
+			- Download UVM 1.2 source files from the browser
+			- Find the path where uvm1.2 is installed
+			- include uvm_pkg.sv file inside list.svh file
+				- `include "uvm_pkg.sv"
+			- import all the packages of the uvm_pkg
+				- import uvm_pkg::*;
+		-> Developing UVM TB components invloves:
+			1. Extend from base class
+			2. Declare any properties
+			3. Register to the Factory (using uvm_component_utils)
+			4. Define function new with arguments
+			5. Implement other methods/common phases
+		
+		
+			SV Class	ALIAS			UVM Base Class
+			------------------------------------------
+			TX			Test Cases		uvm_test
+			GENERATOR	Scenario Generator	uvm_sequencer
+			BFM			Driver			uvm_driver
+			DUT			-				-
+			MONITOR		-				uvm_monitor
+			COVERAGE	Functional Coverage	uvm_subscriber
+			Ref Model	Register Model		uvm_reg_bloavk
+			Scoreboard	-				uvm_scoreboard
+			Checker		-				uvm_comparator
+			Assertions	-				-
+			ENV			-				uvm_env
+			Slave Model	-				uvm_component
+					
+			Displaying
+			$display/$monitor -			uvm_report_handler
+			
+		-> UVM Common Phases
+			- build_phase
+			- connect_phase
+			- end_of_elaboration_phase
+			- start_of_simulation_phase
+			- run_phase
+			- extract_phase
+			- check_phase
+			- report_phase
+
+			- Build Phase
+				- Build phase is where components are created using create method
+				- While creating we should provide name and parent
+				- By doing so, UVM knows the hierarchy of the components
+				- build_phase is where memory is allocated for the objects
+				- Instead of using new method as in SV, UVM uses predefined method to allocate memory
+				- Example
+					- obj = class_name::type_id::create("obj",this);
+			- Connect Phase
+				- Some UVM components have child classes
+				- They need to be connected to eachother
+				- UVM uses connect_phase to components (agent and SBD are to be connected with ENV class)
+			- End Of Elaboration Phase
+				- In end_of_elaboration_phase, UVM knows all the heirarchies of components, their respective connections
+				- In this phase, we can print the uvm topology
+					- uvm_top.print_topology();
+			- Start of Simulation Phase
+				- In this phase, we need to provide all the necessary input variables and their values of the design so that the simulation will start
+			- Run Phase
+				- run_phase is where all the run tasks are defined
+				- This works just same as task run() developed in SV testbench
+			- Extract Phase: extract_phase
+				- Extracts the TX's from various parts of the testbench
+			- Check Phase: check_phase
+				- Checks the above extracted data for any unexpected conditions in the verification environment
+			- Report Phase: report_phase
+				- Reports the above checked results
+		
+		-> Now start developing TB from top module to components
+		-> top module
+			- Declare clk and rst signals
+			- Instantiate mem_intfc as pif 
+			- Instantiate mem_design dut with signals
+			- Instantiate mem_assert dut_assert with signals
+			- Instantiate mem_env
+			- Inside initial begin allocate memory for env and call run task
+			- Generate clock signal using always block
+			- Declare a reset_input() task to reset all the inputs of the design at a single time using this task
+			- Inside another initial begin
+				- Initialize rst to 1;
+				- Now call the reset_input() task to initialize all the inputs as 0
+				- Give some delay so that this reseting can be observed inside
+				  the waveform
+					- For suppose:
+						- #20;
+						- repeat(2)@(posdege clk_i);
+				- Set rst to 0
+			- Inside another initial begin
+				- Instantiate interface pointer handle using uvm_resource_db with following syntax;
+					- uvm_resource_db #(classname)::set("SCOPE_GLOBAL/LOCAL", "POINTER_HANDLE_NAME", pointer_name, null);
+					Example:
+					- uvm_resource_db #(virtual mem_intfc)::set("GLOBAL","MEM_INTFC", pif, null);
+			- Inside another initial begin
+				- call run_test("testcasename") task. This task is already predefined inside uvm_pkg files
+		-> For every UVM testbench, we must call run_test() task
+		-> Whenever run_test is called, we must have a test_lib class component do declare and develop testcases
+		-> class mem_common
+			- UVM testbench requires new function allocation for components and objects in every classes. So declare a new function for both component and object individually as a macro inside common class
+			- For component
+				- `define NEW_COMP\
+					function new(string name="", uvm_component parent);\
+						super.new(name,parent);\
+					endfunction
+			- For object
+				- `define NEW_OBJ\
+					function new(string name="");\
+						super.new(name);\
+					endfunction
+
+		-> class mem_base_test extends uvm_test;
+			- This is the class where testcases are extended from base_test class
+			- Instantiate EVN class
+			- Do factory registration for this component using
+				- `uvm_component_utils(mem_base_test);
+			- Call the `NEW_COMP class to call new function
+			- Now declare all the UVM COMMON PHASES, which ever are required for particular component
+			- It is always a good practice to declare all the common phases
+			- Do coding for required phases and keep all other phases as empty
+				- Common Phases
+					- build_phase
+					- connect_phase
+					- end_of_elaboration_phase
+					- start_of_simulation_phase
+					- run_phase
+					- extract_phase
+					- check_phase
+					- report_phase
+				- Build Phase
+					- Build phase is where components are created using create method
+					- While creating we should provide name and parent
+					- By doing so, UVM knows the hierarchy of the components
+					- build_phase is where memory is allocated for the objects
+					- Instead of using new method as in SV, UVM uses predefined method to allocate memory
+					- Example
+						- obj = class_name::type_id::create("obj",this);
+				- Connect Phase
+					- Some UVM components have child classes
+					- They need to be connected to eachother
+					- UVM uses connect_phase to components (agent and SBD are to be connected with ENV class)
+				- End Of Elobaration Phase
+					- In end_of_elaboration_phase, UVM knows all the heirarchies of components, their respective connections
+					- In this phase, we can print the uvm topology
+						- uvm_top.print_topology();
+				- Start of Simulation Phase
+					- In this phase, we need to provide all the necessary input variables and their values of the design so that the simulation will start
+				- Run Phase
+					- run_phase is where all the run tasks are defined
+					- This works just same as task run() developed in SV testbench
+				- Extract Phase: extract_phase
+					- Extracts the TX's from various parts of the testbench
+				- Check Phase: check_phase
+					- Checks the above extracted data for any unexpected conditions in the verification environment
+				- Report Phase: report_phase
+					- Reports the above checked results
+		- Now develop the required testcases by extending from base_test class
+		-> class mem_wr_rd_test extends mem_base_test;
+			- Do factory registration using `uvm_component_utils(testcasename)
+			- Call `NEW_COMP method
+			- Call the build phase and run_phase
+			- run_phase is declared as a task
+		-> Simillarly, extends different testcases and do the coding with required functionality
+		-> Now develop ENV class
+			- ENV class is extended from uvm_env class
+			- Instantiate agent and sbd as same in SV
+			- Do factory registration as component for ENV class
+			- Call `NEW_COMP
+			- Declare the common phases
+			- For ENV component along with build_phase, connect_phase is declared as AGENT and SBD are tobe connected inside EVN
+				- agent.mon.ap_port.connect(sbd.imp_mem);
+		-> Now develop AGENT class
+			- AGENT class is extended from uvm_agent class
+			- Instantiate SQR,DRV,MON,COV as same in SV
+			- Do factory registration as component for AGENT class
+			- Call `NEW_COMP
+			- Declare the common phases
+			- For AGENT component along with build_phase, connect_phase is declared
+				- In AGENT, DRIVER need to be connected with SEQUENCER and
+				- MONITOR need to be connected with COVERAGE
+					- drv.seq_item_port.connect(sqr.seq_item_export);
+					- mon.ap_port.connect(cov.analysis_export);
+		-> Now develop TX class
+			- TX class is extended from uvm_sequence_item class
+			- Declare all the properties same as declared in SV
+			- Since tx/sequence_item is an object and has fields
+			- Factory registration for object and its fields is done as follows
+				- `uvm_object_utils_begin(mem_tx)
+					`uvm_field_int(addr, UVM_ALL_ON)
+					`uvm_field_int(wr_rd_en, UVM_ALL_ON)
+					`uvm_field_int(data, UVM_ALL_ON)
+				  `uvm_object_utils_end
+			- Call `NEW_OBJ
+		-> Now develop SEQUENCER class
+			- SQR class is extended from uvm_sequencer
+			- uvm_sequencer is a parameterized class whose parameter arguments is a TX class
+			- Do factory registration as component for AGENT class
+			- Call `NEW_COMP
+			- Declare the common phases
+
+			- When we declare a SQR, we need to do the case(testcases) inside a new file called seq_lib.sv file
+			- seq_lib is automatically called inside SQR class by the UVM
+				- class mem_wr_rd_seq is extended from uvm_sequence with tx as a paramenter
+				- Instantiate mem_tx 
+				- Sequence is an object so, do factory registration as an object using `uvm_object_utils(mem_wr_rd_seq);
+				- Call `NEW_OBJ which consists of new function defined as a macro inside mem_common class
+				- Similar to run task declared in SV, UVM has
+					- task body();
+				- This task is by default called by the SQR
+				- Inside body task instead of doing steps like allocating memory to tx, randomising inputs and sending tx data to driver through mail box, all these steps in UVM are done with macro
+					- `uvm_do_with(requesting_item_name,{inline_constraints;});
+					- Cast/Copy req to tx (using $cast)
+						- `uvm_do_with(req,{req.wr_rd==1'b1;}); // Write TX and put tx into mailbox
+						- $cast(tx,req);
+						- `uvm_do_with(req,{req.wr_rd==1'b0; req.addr == tx.addr;});
+		-> Now develop DRIVER class
+			- DRV class is extended from uvm_driver
+			- uvm_driver is a parameterized class whose parameter arguments is a TX class
+			- Instantiate mem_tx
+			- Since Driver is connected to DUT using interface
+			- Instantiate mem_intfc vif
+			- Driver is a component, do factory registration as a component
+			- Call `NEW_COMP
+			- Declare the common phases
+				- In build_phase of driver, allocate memory to vif
+				- This has to be done using uvm_resource_db
+				- Pointer handle for interface is created inside top module
+				- Call this inside driver
+					- uvm_resource_db#(virtual mem_intfc)::read_by_name("GLOBAL","MEM_INTFC",vif,this);
+				- In run_phase
+					- run_phase task has a forever block
+					- Get the data from SQR using .get_next_item(req); method
+					- Call drive_tx(req); task
+					- Now give instruction that item is done using .item_done(); method
+					- drive_tx() task is same as that implemented in SV
+		-> Now develop INTERFACE of mem_intfc
+			- interface mem_intfc
+			- Unlike classes, interface has a physical significance in TB architecture
+			- Interface has a portlist which only consists of only signals which are common through out the entire testbench
+			- In case of memory testbench, CLOCK and RESET signals are the common signals. So, interface portlist consists of clk and rst
+			- Inside interface, all the dut/design signals except CLOCK and
+			  RESET are declared as bit/logic vectors
+			- No need to mention input/output here
+			- Interface also has clocking block generation
+				- Clocking Block
+					- clocking is done to observe the outputs at the time when input is given
+					- This is done by giving skew to the signals
+					- There are input and output skews
+					- Input skew: Time before the clockedge for DUT Output is sampled
+						- Default value of input skew is #1
+					- Output skew: Time after the clockedge for DUT Input is driven
+						- Default value of output skew is #0
+					- For bfm_cb: clocking bfm_cb@(posedge clk_i)
+						- Declare default skews
+							- default input #0 output #1
+						- As bfm is a class component and dut is a module component, during clocking, the outputs of dut will be the inputs of clocking block and the inputs of the dut will be declared as the output 's
+					- For mon_cb: clocking mon_cb@(posdege clk_i)
+						- As mon does not connect with any module component, during clocking, there is no need of output skew
+						- Declare all the signals of dut as inputs with default skew as
+							- default input #1
+		-> Now develop MON class
+			- mon class is extended from uvm_monitor class
+			- MON is having an analysis port declared to help connect with COV and to run the write() function
+				- uvm_analysis_port #(mem_tx) ap_port;
+			- Instantiate interface
+			- Instantiate mem_tx
+			- Since MON is a component, do factory registration as a component
+			- Call `NEW_COMP
+			- Due to persence of vif,
+				- Call it from uvm_resource_db from top module inside build_phase
+			- ap_port = new("ap_port",this);
+			- In run_phase
+				- task run_phase is having a forever begin
+				- Do the functionality same as in SV
+				- Declare a run task and build the mon logic inside it
+				- MON run task is also a forever block
+				- Check for handshaking whether happening or not
+					-i.e. if(vif.mon_cb.valid_i==1 && vif.mon_cb.ready_o==1)begin
+					-assign the remaining fields into tx
+				- call the ap_port.write(tx) task
+		-> Now develop COV class
+			- cov class is extended from uvm_subscriber class
+			- uvm_subscriber is a parameterized class whose parameter arguments is a TX class
+			- COV is a component so do factory registration as a component
+			- Call `NEW_COMP
+			- Declare covergroups same as in SV
+			- COV has to be done through the help of covergroup->coverpoint->bins
+			- Due to presence of covergroup, new function is to be declared to assign new method to the covergroup
+			- Design covergroup follwed by coverpoints which consists of bins
+			- Subscriber has as default write(mem_tx t) method which is automatically called
+			- Inside write() method, do sampling for covergroup
+		-> Now develop SBD class
+			- SBD is extended from uvm_scoreboard class
+			- SBD is having an implementation port declared to help connect with ENV and to run the write() function
+				- uvm_analysis_imp #(mem_tx,mem_sbd) imp_mem;
+			- Declare sbd_mem vector
+			- SBD is a component. Do factory registration as a component
+			- Call `NEW_COMP
+			- Inside build_phase, allocate memory to imp_mem using new("imp_mem",this)
+			- Now call the write function(mem_tx tx);
+			- write function here is different from wirte task inside COV
+			- Inside write function
+				- Do the functionality same as in SV
+				- Check if the write tx is happening or a read tx is happening
+				- On write tx, write the tx.data into the sbd_mem of tx.addr
+				- On read tx, compare the sbd_mem at the tx.addr with tx.data
+				- If matched, increment matching count which is predefined and instantiated to 0 inside the mem_common class
+				- If not matched, increment mis_matching count which is also predefined in the mem_common class and instantiated to 0
+			- Display the respective messages from SBD for debugging purpose
+			- Displaying in UVM based TB is done using any of these macros
+				- `uvm_info
+					-Syntax:
+						`uvm_info("ID_NAME",$psprintf("MESSAGE_TO_PRINT"),VERBOSITY);
+				- `uvm_error
+					-Syntax:
+						`uvm_error("ID_NAME",$psprintf("ERROR_MESSAGE_TO_PRINT"));
+				- `uvm_warning
+					-Syntax:
+						`uvm_warning("ID_NAME",$psprintf("WARNING_MESSAGE_TO_PRINT"));
+				- `uvm_fatal
+					-Syntax:
+						`uvm_fatal("ID_NAME",$psprintf("FATAL_ERROR_MESSAGE_TO_PRINT"));
+		-> list.svh
+			- .svh refers to a system verilog header file
+			- All the files required for the project are included in this file using `include
+			- Either all the files are included in the ordered format or using typedef instantiate all the classes
+		
+
+		-> To check covergroups in questasim
+				- After simulation, -> view -> coverage -> covergroups
+			- To check code coverage
+				- In run.do - Do the optimization to the work.top file
+				- In the same line add +cover=fcbest and give coverage name
+				- During simulation add -coverage coveragename
+				- Next step is to save the coverage report
+					- coverage save -onexit testcasename.ucdb
+			- To check code coverage report in questasim
+				- As code coverage is done to the DUT
+				- Select cursor on -> sim tab -> select dut -> view -> Coverage -> Code Coverage Analysis
+				- Now to view report in browser, -> Tools -> Coverage Report -> HTML -> Check Source Code box and All Coverage Types, Make them tick -> OK
+					- Coverage report will be opened in browser window, check for 100% completion of DUT
+		
+		-> To view assertions in the waveform
+				- Do not optimize the design during simulation
+				- In simulation line after simulating the design, add -assertdebug
+				- Now -> sim tab -> select dut_assert -> View -> Coverage -> Assertions
+				- Now select the concurrent assertions which you have written
+				  as properties in the mem_assert file
+				- Select them all -> Mouse Right Click -> Add Wave -> Selected Objects
+				- Waveform will be updated with empty assertion signals
+				- If needed, group the assertion signals as one and design signals as seperate group for easy understating of the waveform window in future projects where some hundreds of signals will be there
+				- Select all the wave signals and save them using Ctrl+S as wave.do file
+				- Now comment the add wave line in the run.do file and write command 
+					- do wave.do
+				- Now re-run the simulation once and you are now able to see the assertions in the waveform
+

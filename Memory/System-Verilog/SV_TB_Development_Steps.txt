@@ -1,0 +1,278 @@
+Developing Memory Design and Testbench development from scratch using System Verilog
+
+Step 1: To Develop the Design File for memory project
+		-> First identify the signals required for memory
+			- CLK - Clock Signal - Continuous Clock Generation
+			- RST - Reset Signal - If 1: Design signals are set to 0, If 0: Design functinality starts
+			- WR_RD_EN - Write/Read Enalble Signal - If 1: Write to memory, If 0: Read from memory
+			- VALID - Handshaking Signal - Waits for READY signal to become 1
+			- READY - Handshaking Signal - Transaction happens only when both VALID and READY are 1
+			- ADDR - Address where to wirte or read data
+			- WR_DATA - Write data into memory address/location
+			- RD_DATA - Read data from the memory address/location
+		-> Identify the input and output ports from the above signals and label them.
+			- clk_i : Input
+			- rst_i : Input
+			- valid_i: Input
+			- wr_rd_en_i:Input
+			- addr_i: Input
+			- wdata_i: Input
+			- ready_o: Output
+			- rdata_o: Output
+		-> Declare the signals with required size inside a module.
+			- For memory design, Address Width, Memory Width and Memory Depth are requied
+			- Declare them either as parameters or as macro definitions so that they can be used anywhere in the global scope
+			
+			`define MEM_DEPTH 16
+			`define MEM_WIDTH 64
+			`define ADDR_WIDTH $clog2(`MEM_DEPTH)
+
+			- Signals Size Declaration
+			- clk_i - Reg variable (0/1)
+			- rst_i - Reg variable (0/1)
+			- valid_i - Reg variable (0/1)
+			- wr_rd_en_i - Reg variable (0/1)
+			- addr_i - Reg Vector of size [`ADDR_WIDTH-1:0]
+			- wdata_i - Reg Vector of size [`MEM_WIDTH-1:0]
+			- ready_o - Reg variable (0/1)
+			- rdata_o - Reg Vector of size [`MEM_WIDTH-1:0]
+		-> Logic development 
+			- Since clock signal is involved, design is always dependent on posedge/negedge of clock as per the requirement
+			- Check if reset is high or low
+				- If reset == 1: Initialize all other signals to zero
+				- If reset == 0: Check if valid is high or not
+					- If valid == 1: make ready == 1 and check if wr_rd_en is high or not
+						- If wr_rd_en == 1: Write data into address location
+						- If wr_rd_en == 0: Read data from address location
+					- If valid == 0: make ready = 0 and exit loop
+		-> By this the memory design development will be completed
+
+Step 2: Developing Testbench for above created design file using System Verilog
+		-> SV development consists of class components and Interfaces that connect to the top module of the testbench
+		-> SV TB development is done with bottom-top approach (i.e. from TX class to ENV class -> top module)
+			- class mem_common
+			- class mem_tx
+			- class mem_gen
+			- class mem_bfm
+			- interface mem_intfc
+			- class mem_mon
+			- class mem_cov
+			- class mem_agent
+			- class mem_sbd
+			- class mem_env
+			- module top
+		-> Common class consists of all the common variable declaration/macros etc
+		-> top module is developed and updated simultaneously while developing the TB
+		-> Class consists of properties, constraints and methods
+		-> class mem_tx
+			- TX class is where we declare all the required properties for testing and randomising etc. For memory tb, properties are wr_rd_en, addr, data. All the remaining signals like clk, rst and handshaking signals are declare and generated inside top module
+			- All the properties inside tx class are declared as rand/randc as per the requirement
+			- There are no constraints for the memory project
+			- Methods such as print(), copy(), compare(), pack(), unpack() etc. are developed by the user as per the requirement
+		-> class mem_gen
+			- Generator class uses tx's to generate required fields/data
+			- Input to the generator class is the tx and the output is given to mailbox which will be declared/instantiated inside mem_common
+			- So, instantiation/object creation for tx class is to be done in this class
+			- Declare a run task and build the logic inside it
+				- From common class, get the testcase name and run case statement
+				- task run();
+					case(mem_common::testcase)
+				- Now randomize the write tx using inline constrant
+				- Put the tx inside mailbox gen2bfm which is also declared in mem_common
+				- Now randomize the read tx using inline constraint
+				- Put the tx inside mailbox gen2bfm which is also declared in mem_common
+		-> class mem_bfm/driver
+			- BFM/Driver class also uses tx's that will be received from generator. So instantiate mem_tx
+			- BFM gets the tx from Generator through Mailbox gen2bfm
+			- Input to BFM is tx from mailbox and output is given to the dut using interface
+			- Instantite interface in a new file and create virtual memory for it inside bfm
+				- virtual mem_intfc vif;
+			- Due to presence of interface, we need new method to allocate memory for it
+			  	- function new();
+					vif=top.pif;
+				  endfunction
+			- Declare a run task and build the bfm logic inside
+				- BFM has to continuously accept the requests from generator so, we use a forever loop
+				- Now get the tx from mailbox using gen2bfm.get() method
+				- call the drive_tx task
+			- Declare drive_tx task which either write or read the data based on tx
+				- Due to presence of interface block, we need to develop clocking block to view the output in transcript
+				- Drive tx works based on the posedge of this clocking block
+				- Assign the received data to the current tx
+		-> class mem_mon
+			- MON class uses interface to receive data from BFM/Driver
+			- MON gets input from interface and output is given to COV and SBD
+			- Input to MON is from interface vif and Output is in the form of TX's sent to COV and SBD using mailbox
+			- Instantiate and create object for interface and mem_tx class
+			- Due to presence of interface, we need new method to allocate memory
+				- function new();
+				 	vif=top.pif;
+				  endfunction
+			- Declare a run task and build the mon logic inside it
+				- MON run task is also a forever block
+				- Check for handshaking whether happening or not
+					-i.e. if(vif.mon_cb.valid_i==1 && vif.mon_cb.ready_o==1)begin
+					-assign the remaining fields into tx
+				- Transfer tx to COV and SBD using mailbox .put() method
+		-> class mem_cov
+			- COV class gets the tx from MON
+			- Instantiate mem_tx class
+			- COV has to be done through the help of covergroup->coverpoint->bins
+			- Due to presence of covergroup, new function is to be declared to assign new method to the covergroup
+			- Design covergroup follwed by coverpoints which consists of bins
+			- Declare a run task and build the logic inside it
+				- COV also runs in the forever loop
+				- instantiate covergroup instance names and run cg.sample() method
+			
+			- This completes the functional coverage which is used to check cover report of all the testbench components
+			- To check covergroups in questasim
+				- After simulation, -> view -> coverage -> covergroups
+			- To check code coverage
+				- In run.do - Do the optimization to the work.top file
+				- In the same line add +cover=fcbest and give coverage name
+				- During simulation add -coverage coveragename
+				- Next step is to save the coverage report
+					- coverage save -onexit testcasename.ucdb
+			- To check code coverage report in questasim
+				- As code coverage is done to the DUT
+				- Select cursor on -> sim tab -> select dut -> view -> Coverage -> Code Coverage Analysis
+				- Now to view report in browser, -> Tools -> Coverage Report -> HTML -> Check Source Code box and All Coverage Types, Make them tick -> OK
+					- Coverage report will be opened in browser window, check for 100% completion of DUT
+		-> class agent
+			- Agent class is the one which holds the components like GEN, BFM, MON and COV
+			- Instantiate all the 4 components inside the agent class
+			- Allocate memory to each of them using new()
+			- Declare a run task
+			- Using fork join, call the run tasks of GEN, BFM, MON and COV so
+			  that they all run simultaneously
+
+		-> class mem_sbd
+			- SBD class gets the tx from MON
+			- Instantiate mem_tx class
+			- SBD duty is to check for functionality of the logic written in the design file/RTL file
+			- For this project, SBD also requies a temperory memory which as
+			  as main memory
+			- So, instantiate sbd_mem with width and depth same as the main
+			  memory in the design file
+			- Declare a run task and build the sbd logic inside it
+				- SBD also runs in a forever loop
+				- Instantiate the tx using new
+				- Get the tx from mailbox using get method as mon2sbd.get(tx)
+				- Check if the write tx is happening or a read tx is happening
+				- On write tx, write the tx.data into the sbd_mem of tx.addr
+				- On read tx, compare the sbd_mem at the tx.addr with tx.data
+				- If matched, increment matching count which is predefined and instantiated to 0 inside the mem_common class
+				- If not matched, increment mis_matching count which is also predefined in the mem_common class and instantiated to 0
+			- Display the respective messages from SBD for debugging purpose
+		-> class mem_env
+			- EVN class is the one next to that of the top module in the TB architecture
+			- Instantiate all the agents and scoreboards inside the ENV class and allocate memory to them
+			- Declare a run task
+			- Using fork join, call the run tasks of agents and scorebords so they can run simultaneously
+		-> interface mem_intfc
+			- Unlike classes, interface has a physical significance in TB architecture
+			- Interface has a portlist which only consists of only signals which are common through out the entire testbench
+			- In case of memory testbench, CLOCK and RESET signals are the common signals. So, interface portlist consists of clk and rst
+			- Inside interface, all the dut/design signals except CLOCK and
+			  RESET are declared as bit/logic vectors
+			- No need to mention input/output here
+			- Interface also has clocking block generation
+				- Clocking Block
+					- clocking is done to observe the outputs at the time when input is given
+					- This is done by giving skew to the signals
+					- There are input and output skews
+					- Input skew: Time before the clockedge for DUT Output is sampled
+						- Default value of input skew is #1
+					- Output skew: Time after the clockedge for DUT Input is driven
+						- Default value of output skew is #0
+					- For bfm_cb: clocking bfm_cb@(posedge clk_i)
+						- Declare default skews
+							- default input #0 output #1
+						- As bfm is a class component and dut is a module component, during clocking, the outputs of dut will be the inputs of clocking block and the inputs of the dut will be declared as the output 's
+					- For mon_cb: clocking mon_cb@(posdege clk_i)
+						- As mon does not connect with any module component, during clocking, there is no need of output skew
+						- Declare all the signals of dut as inputs with default skew as
+							- default input #1
+		-> module mem_assert
+			- Assert module is used to do the assertions for the given dut
+			- Assertions help in debuging the code using waveforms
+			- As, they need to be checked in the waveform, they need physical
+			  ports to be observed
+			- So, declare assertion as a module
+			- All the design file ports are to be given in the portlist of assertion module
+			- Unlike design module, assertion module ports are all declared as input 's only
+			- write the properties for all the assertions/conditions to be checked step by step manner
+			- To view assertions in the waveform
+				- Do not optimize the design during simulation
+				- In simulation line after simulating the design, add -assertdebug
+				- Now -> sim tab -> select dut_assert -> View -> Coverage -> Assertions
+				- Now select the concurrent assertions which you have written
+				  as properties in the mem_assert file
+				- Select them all -> Mouse Right Click -> Add Wave -> Selected Objects
+				- Waveform will be updated with empty assertion signals
+				- If needed, group the assertion signals as one and design signals as seperate group for easy understating of the waveform window in future projects where some hundreds of signals will be there
+				- Select all the wave signals and save them using Ctrl+S as wave.do file
+				- Now comment the add wave line in the run.do file and write command 
+					- do wave.do
+				- Now re-run the simulation once and you are now able to see the assertions in the waveform
+		-> module top
+			- Top module the uppermost layer the the testbench development of any design
+			- Declare CLOCK and RESET signals as they are common in the entire testbench
+			- Intantiate the interface mem_intfc as pif
+				- mem_intfc pif(clk,rst);
+			- Intantiate the design in the top module
+			- Connect the ports of design and top module using connection_by_port_name procees and connect using pif.signal(singal) form
+				- For example
+					- memory_design dut (.clk_i(pif.clk_i), .rst_i(pif.rst_i).....));
+			- Simillary, instantiate the assertion module
+			- Connect the ports of assertion to the top module using connection_by_port_name process as shown in the above example
+				- For example
+					- memory_assert dut_assert (.clk_i(pif.clk_i), .rst_i(pif.rst_i).....));
+			- Instantiate the ENV class
+			- Write logic to generate clk signal using forever block or always begin block as per user choice
+			- Inside initial begin
+				- Allocate memory to env using new();
+				- Call the env.run() task so that entire testbench components run task are being get called
+			- Inside another initial beign
+				- Assign the pointer handle of pif to the vif which was earlier declared inside mem_common class
+					- mem_common::vif=pif;
+			- Declare a reset_input() task to reset all the inputs of the design at a single time using this task
+			
+			- Inside another initial begin
+				- Initialize rst to 1;
+				- Now call the reset_input() task to initialize all the inputs as 0
+				- Give some delay so that this reseting can be observed inside
+				  the waveform
+					- For suppose:
+						- #20;
+						- repeat(2)@(posdege clk_i);
+				- Set rst to 0
+				- Give some delay for the entire simulation to be completed and like #1500;
+				- Use $finish to end the simulation after the alloted delay time
+		-> list.svh
+			- .svh refers to a system verilog header file
+			- All the files required for the project are included in this file using `include
+			- Either all the files are included in the ordered format or using typedef instantiate all the classes
+				- typedef class mem_tx;
+				- typedef class mem_common;
+				- typedef class mem_gen;
+				- typedef class mem_bfm;
+				- typedef class mem_mon;
+				- typedef class mem_cov;
+				- typedef class mem_agent;
+				- typedef class mem_sbd;
+				- typedef class mem_env;
+				
+				- `include "mem_design.sv"
+				- `include "mem_assert.sv"
+				- `include "mem_common.sv"
+				- `include "mem_intfc.sv"
+				- `include "mem_tx.sv"
+				- `include "mem_gen.sv"
+				- `include "mem_bfm.sv"
+				- `include "mem_mon.sv"
+				- `include "mem_cov.sv"
+				- `include "mem_agent.sv"
+				- `include "mem_sbd.sv"
+				- `include "mem_env.sv"
+				- `include "top.sv"
