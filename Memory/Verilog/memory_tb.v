@@ -38,7 +38,7 @@ task reset_task();
 	begin
 		wdata_i=0;
 		addr_i=0;
-		wr_rd_en_i=0;
+		wr_rd_i=0;
 		valid_i=0;
 	end
 endtask
@@ -52,24 +52,24 @@ initial begin
 	$display("\n\tTestcase= %0s\n",testcase);
 	case(testcase)
 		"fd_write_fd_read":begin // Frontdoor Write Frontdoor Read
-			fd_write_task(0,DEPTH);
-			fd_read_task(0,DEPTH);
+			fd_write_task(0,MEMORY_DEPTH);
+			fd_read_task(0,MEMORY_DEPTH);
 		end
 		"bd_write_bd_read":begin // Backdoor Write Backdoor Read
-			bd_write_task(0,DEPTH);
-			bd_read_task(DEPTH*2/4,DEPTH/4);
+			bd_write_task(0,MEMORY_DEPTH);
+			bd_read_task(MEMORY_DEPTH*2/4,MEMORY_DEPTH/4);
 		end
 		"fd_write_bd_read":begin // Frontdoor Write Backdoor Read
-			fd_write_task(0,DEPTH);
-			bd_read_task(0,DEPTH);
+			fd_write_task(0,MEMORY_DEPTH);
+			bd_read_task(0,MEMORY_DEPTH);
 		end
 		"bd_write_fd_read":begin // Backdoor Write Frontdoor Read
-			bd_write_task(0,DEPTH);
-			fd_read_task(0,DEPTH);
+			bd_write_task(0,MEMORY_DEPTH);
+			fd_read_task(0,MEMORY_DEPTH);
 		end
 		"random_write_read":begin // Random Address Write, Random Address Read
-			random_write_task(0,DEPTH);
-			random_read_task(0,DEPTH);
+			random_write_task(0,MEMORY_DEPTH);
+			random_read_task(0,MEMORY_DEPTH);
 		end
 	endcase
 		
@@ -82,7 +82,7 @@ task fd_write_task(input [ADDRESS_WIDTH-1:0]start_adderss,[ADDRESS_WIDTH:0]numbe
 		@(posedge clk_i)
 		wdata_i=$random; 
 		addr_i=i; 
-		wr_rd_en_i=1;
+		wr_rd_i=1;
 		valid_i=1; 
 		wait(ready_o==1); 
 	end
@@ -97,7 +97,7 @@ task fd_read_task(input [ADDRESS_WIDTH-1:0]start_adderss,[ADDRESS_WIDTH:0]number
 	for(i=start_adderss;i<=(start_adderss+number_of_locations);i=i+1)begin
 		@(posedge clk_i)
 		addr_i=i;
-		wr_rd_en_i=0;
+		wr_rd_i=0;
 		valid_i=1;
 		wait(ready_o==1);
 	end
@@ -128,7 +128,7 @@ task random_write_task(input [ADDRESS_WIDTH-1:0]start_adderss,[ADDRESS_WIDTH:0]n
 		wdata_i=$random; 
 		addr_i=$random;
 	    memory_tb_mem[i]=addr_i;	
-		wr_rd_en_i=1;
+		wr_rd_i=1;
 		valid_i=1; 
 		wait(ready_o==1); 
 	end
@@ -144,7 +144,7 @@ task random_read_task(input [ADDRESS_WIDTH-1:0]start_adderss,[ADDRESS_WIDTH:0]nu
 		@(posedge clk_i)
 		//addr_i=$random;
 		addr_i=memory_tb_mem[i];
-		wr_rd_en_i=0;
+		wr_rd_i=0;
 		valid_i=1;
 		wait(ready_o==1);
 	end

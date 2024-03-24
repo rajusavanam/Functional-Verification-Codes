@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/Memory/Verilog
+vmemory
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 Sg03d]UiiN_Y0TR5m:1Zl1
+I=Zho4]k;kHX1iOXGPW16K2
+R0
+w1711262341
+8memory_design.v
+Fmemory_design.v
+L0 24
+Z2 OL;L;10.7c;67
+31
+Z3 !s108 1711262952.000000
+Z4 !s107 memory_design.v|memory_tb.v|
+Z5 !s90 -reportprogress|300|memory_tb.v|
+!i113 0
+Z6 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z7 tCvgOpt 0
+vmemory_tb
+R1
+r1
+!s85 0
+!i10b 1
+!s100 b@G5;HfS@R]Qj]bL0l@nh3
+IKiFIc>28mYB=EeI9[=FNb1
+R0
+w1711262778
+8memory_tb.v
+Fmemory_tb.v
+L0 10
+R2
+31
+R3
+R4
+R5
+!i113 0
+R6
+R7
