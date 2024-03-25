@@ -1,0 +1,1 @@
+  CREATE_STREAM @0 {NAME:seq_i T:Transactions SCOPE:uvm_test_top.env_i.agent_i.sqr STREAM:613}
