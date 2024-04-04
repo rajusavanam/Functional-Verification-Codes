@@ -1,0 +1,132 @@
+# Reading C:/questasim64_10.7c/tcl/vsim/pref.tcl
+# //  Questa Sim-64
+# //  Version 10.7c win64 Aug 18 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# do run.do
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+# Start time: 21:57:17 on Apr 03,2024
+# vlog -reportprogress 300 list.svh "+incdir+H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src" 
+# -- Compiling package uvm_pkg
+# -- Compiling package list_svh_unit
+# -- Importing package uvm_pkg
+# ** Warning: alu_tx.sv(22): (vlog-2121) Illegal concatenation of an unsized constant. Will treat it as a 32-bit value.
+# -- Compiling module alu_design
+# -- Compiling interface alu_intfc
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 21:57:22 on Apr 03,2024, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 1
+# vsim -novopt -suppress 12110 top -assertdebug -sv_lib C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi -sv_seed 04022924 
+# Start time: 21:57:22 on Apr 03,2024
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\export_tramp.dll
+# ** Warning: (vsim-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.top
+# ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.list_svh_unit
+# ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.uvm_pkg
+# ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Loading sv_std.std
+# Loading work.uvm_pkg
+# Loading work.list_svh_unit
+# ** Note: (vsim-8785) UVM-aware debugging capabilities will be disabled since no compiled "questa_uvm_pkg" can be found.
+# This also means that later if you turn on UVM-aware debugging your debug simulations may have
+# different random seeds from your non-debug simulations.
+# Loading work.top
+# Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.alu_intfc
+# ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Loading work.alu_intfc
+# Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.alu_design
+# ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Loading work.alu_design
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit File: alu_mon.sv Line: 9
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::base_seq File: seq_lib.sv Line: 14
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::alu_drv File: alu_drv.sv Line: 9
+# Compiling C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\exportwrapper.c
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\vsim_auto_compile.dll
+# Loading C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi.dll
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(392) @ 0: reporter [UVM/RELNOTES] 
+# ----------------------------------------------------------------
+# UVM-1.2
+# (C) 2007-2014 Mentor Graphics Corporation
+# (C) 2007-2014 Cadence Design Systems, Inc.
+# (C) 2006-2014 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# (C) 2013-2014 NVIDIA Corporation
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO @ 20: reporter [RNTST] Running test base_test...
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(579) @ 20: reporter [UVMTOP] UVM testbench topology:
+# --------------------------------------------------------------
+# Name                       Type                    Size  Value
+# --------------------------------------------------------------
+# uvm_test_top               base_test               -     @343 
+#   env                      alu_env                 -     @356 
+#     agent                  alu_agent               -     @365 
+#       cov                  alu_cov                 -     @558 
+#         analysis_imp       uvm_analysis_imp        -     @567 
+#       drv                  alu_drv                 -     @520 
+#         rsp_port           uvm_analysis_port       -     @539 
+#         seq_item_port      uvm_seq_item_pull_port  -     @529 
+#       mon                  alu_mon                 -     @549 
+#         ap_port            uvm_analysis_port       -     @578 
+#       sqr                  uvm_sequencer           -     @383 
+#         rsp_export         uvm_analysis_export     -     @392 
+#         seq_item_export    uvm_seq_item_pull_imp   -     @510 
+#         arbitration_queue  array                   0     -    
+#         lock_queue         array                   0     -    
+#         num_last_reqs      integral                32    'd1  
+#         num_last_rsps      integral                32    'd1  
+#     sbd                    alu_sbd                 -     @374 
+#       alu_imp              uvm_analysis_imp        -     @594 
+# --------------------------------------------------------------
+# 
+# UVM_FATAL H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(1067) @ 20: reporter [RUNPHSTIME] The run phase must start at time 0, current time is 20. No non-zero delays are allowed before run_test(), and pre-run user defined phases may not consume simulation time before the start of the run phase.
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_report_server.svh(847) @ 20: reporter [UVM/REPORT/SERVER] 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :    3
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    1
+# ** Report counts by id
+# [RNTST]     1
+# [RUNPHSTIME]     1
+# [UVM/RELNOTES]     1
+# [UVMTOP]     1
+# 
+# ** Note: $finish    : H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(135)
+#    Time: 20 ns  Iteration: 52  Region: /uvm_pkg::uvm_task_phase::execute
+# 1
+# Break in Function uvm_pkg/uvm_root::die at H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh line 135
+# End time: 21:58:50 on Apr 03,2024, Elapsed time: 0:01:28
+# Errors: 0, Warnings: 4
