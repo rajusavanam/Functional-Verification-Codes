@@ -15,7 +15,7 @@
 # //
 # do run.do
 # QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
-# Start time: 21:57:17 on Apr 03,2024
+# Start time: 12:49:45 on Apr 04,2024
 # vlog -reportprogress 300 list.svh "+incdir+H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src" 
 # -- Compiling package uvm_pkg
 # -- Compiling package list_svh_unit
@@ -27,11 +27,11 @@
 # 
 # Top level modules:
 # 	top
-# End time: 21:57:22 on Apr 03,2024, Elapsed time: 0:00:05
+# End time: 12:49:48 on Apr 04,2024, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 1
-# vsim -novopt -suppress 12110 top -assertdebug -sv_lib C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi -sv_seed 04022924 
-# Start time: 21:57:22 on Apr 03,2024
-# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\export_tramp.dll
+# vsim -novopt -suppress 12110 top -assertdebug -sv_lib C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi -sv_seed 04022924 "+UVM_TESTNAME=base_test" 
+# Start time: 12:49:48 on Apr 04,2024
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_10320\win64_gcc-10.3.0\export_tramp.dll
 # ** Warning: (vsim-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
 # Refreshing C:/Users/srsre/Documents/GitHub/Functional-Verification-Codes/ALU/work.top
 # ** Warning: (vlog-8891) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
@@ -58,8 +58,8 @@
 #    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::base_seq File: seq_lib.sv Line: 14
 # ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
 #    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::alu_drv File: alu_drv.sv Line: 9
-# Compiling C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\exportwrapper.c
-# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_2356\win64_gcc-10.3.0\vsim_auto_compile.dll
+# Compiling C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_10320\win64_gcc-10.3.0\exportwrapper.c
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_10320\win64_gcc-10.3.0\vsim_auto_compile.dll
 # Loading C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi.dll
 # UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(392) @ 0: reporter [UVM/RELNOTES] 
 # ----------------------------------------------------------------
@@ -83,8 +83,8 @@
 # 
 #       (Specify +UVM_NO_RELNOTES to turn off this notice)
 # 
-# UVM_INFO @ 20: reporter [RNTST] Running test base_test...
-# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(579) @ 20: reporter [UVMTOP] UVM testbench topology:
+# UVM_INFO @ 0: reporter [RNTST] Running test base_test...
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(579) @ 0: reporter [UVMTOP] UVM testbench topology:
 # --------------------------------------------------------------
 # Name                       Type                    Size  Value
 # --------------------------------------------------------------
@@ -109,24 +109,1261 @@
 #       alu_imp              uvm_analysis_imp        -     @594 
 # --------------------------------------------------------------
 # 
-# UVM_FATAL H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(1067) @ 20: reporter [RUNPHSTIME] The run phase must start at time 0, current time is 20. No non-zero delays are allowed before run_test(), and pre-run user defined phases may not consume simulation time before the start of the run phase.
-# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_report_server.svh(847) @ 20: reporter [UVM/REPORT/SERVER] 
+# ** Error: Assertion error.
+#    Time: 20 ns Started: 10 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 30 ns Started: 20 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65 Expr: result==operand_a%operand_b
+# ** Error: Assertion error.
+#    Time: 30 ns Started: 20 ns  Scope: top.pif.HANDSHAKE File: alu_intfc.sv Line: 60 Expr: ready_o==1
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @627                          
+#   ope_a                        integral  32    'hf5                          
+#   ope_b                        integral  32    'h26c                         
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    0                             
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 50 ns Started: 40 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65 Expr: result==operand_a%operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @661                          
+#   ope_a                        integral  32    'h235                         
+#   ope_b                        integral  32    'h3cb                         
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    40                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 60 ns Started: 50 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 70 ns Started: 60 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65 Expr: result==operand_a%operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @673                          
+#   ope_a                        integral  32    'h1a6                         
+#   ope_b                        integral  32    'h38b                         
+#   ope                          integral  3     'h2                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    60                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 80 ns Started: 70 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 90 ns Started: 80 ns  Scope: top.pif.MUL_OPE File: alu_intfc.sv Line: 63 Expr: result==operand_a*operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @685                          
+#   ope_a                        integral  32    'hb5                          
+#   ope_b                        integral  32    'hf3                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    80                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 100 ns Started: 90 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 110 ns Started: 100 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68 Expr: result==operand_a^operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @697                          
+#   ope_a                        integral  32    'h47                          
+#   ope_b                        integral  32    'h288                         
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    100                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 120 ns Started: 110 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 130 ns Started: 120 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67 Expr: result==operand_a|operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @709                          
+#   ope_a                        integral  32    'h203                         
+#   ope_b                        integral  32    'h272                         
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    120                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 140 ns Started: 130 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 150 ns Started: 140 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @721                          
+#   ope_a                        integral  32    'h10f                         
+#   ope_b                        integral  32    'hba                          
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    140                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 160 ns Started: 150 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 170 ns Started: 160 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66 Expr: result==operand_a&operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @733                          
+#   ope_a                        integral  32    'h29c                         
+#   ope_b                        integral  32    'h309                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    160                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 180 ns Started: 170 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 190 ns Started: 180 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62 Expr: result==operand_a-operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @745                          
+#   ope_a                        integral  32    'h8b                          
+#   ope_b                        integral  32    'h2a5                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    180                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 200 ns Started: 190 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 210 ns Started: 200 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62 Expr: result==operand_a-operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @757                          
+#   ope_a                        integral  32    'h91                          
+#   ope_b                        integral  32    'h371                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    200                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 220 ns Started: 210 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 230 ns Started: 220 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66 Expr: result==operand_a&operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @769                          
+#   ope_a                        integral  32    'h111                         
+#   ope_b                        integral  32    'h214                         
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    220                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 240 ns Started: 230 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 250 ns Started: 240 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64 Expr: result==operand_a/operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @781                          
+#   ope_a                        integral  32    'h1ef                         
+#   ope_b                        integral  32    'h1a9                         
+#   ope                          integral  3     'h2                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    240                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 260 ns Started: 250 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 270 ns Started: 260 ns  Scope: top.pif.MUL_OPE File: alu_intfc.sv Line: 63 Expr: result==operand_a*operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @793                          
+#   ope_a                        integral  32    'h1f7                         
+#   ope_b                        integral  32    'hb1                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    260                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 280 ns Started: 270 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 290 ns Started: 280 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68 Expr: result==operand_a^operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @805                          
+#   ope_a                        integral  32    'h27b                         
+#   ope_b                        integral  32    'h387                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    280                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 300 ns Started: 290 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 310 ns Started: 300 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66 Expr: result==operand_a&operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @817                          
+#   ope_a                        integral  32    'h8e                          
+#   ope_b                        integral  32    'h76                          
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    300                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 320 ns Started: 310 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 330 ns Started: 320 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66 Expr: result==operand_a&operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @829                          
+#   ope_a                        integral  32    'h226                         
+#   ope_b                        integral  32    'hb8                          
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    320                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 340 ns Started: 330 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 350 ns Started: 340 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65 Expr: result==operand_a%operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @841                          
+#   ope_a                        integral  32    'ha5                          
+#   ope_b                        integral  32    'h2ed                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    340                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 360 ns Started: 350 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 370 ns Started: 360 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66 Expr: result==operand_a&operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @853                          
+#   ope_a                        integral  32    'hf6                          
+#   ope_b                        integral  32    'hca                          
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    360                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 380 ns Started: 370 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 390 ns Started: 380 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65 Expr: result==operand_a%operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @865                          
+#   ope_a                        integral  32    'h1a2                         
+#   ope_b                        integral  32    'hd8                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    380                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 400 ns Started: 390 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 410 ns Started: 400 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68 Expr: result==operand_a^operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @877                          
+#   ope_a                        integral  32    'h31b                         
+#   ope_b                        integral  32    'h232                         
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    400                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 420 ns Started: 410 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 430 ns Started: 420 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64 Expr: result==operand_a/operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @889                          
+#   ope_a                        integral  32    'h1e                          
+#   ope_b                        integral  32    'h8a                          
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    420                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 440 ns Started: 430 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 450 ns Started: 440 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62 Expr: result==operand_a-operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @901                          
+#   ope_a                        integral  32    'h246                         
+#   ope_b                        integral  32    'h2ab                         
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    440                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 460 ns Started: 450 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 470 ns Started: 460 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68 Expr: result==operand_a^operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @913                          
+#   ope_a                        integral  32    'h1eb                         
+#   ope_b                        integral  32    'ha8                          
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    460                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 480 ns Started: 470 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 490 ns Started: 480 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @925                          
+#   ope_a                        integral  32    'h32f                         
+#   ope_b                        integral  32    'h233                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    480                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 500 ns Started: 490 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 510 ns Started: 500 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62 Expr: result==operand_a-operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @937                          
+#   ope_a                        integral  32    'h331                         
+#   ope_b                        integral  32    'h109                         
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    500                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 520 ns Started: 510 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 530 ns Started: 520 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @949                          
+#   ope_a                        integral  32    'h324                         
+#   ope_b                        integral  32    'h31                          
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    520                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 540 ns Started: 530 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 550 ns Started: 540 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @961                          
+#   ope_a                        integral  32    'h3d5                         
+#   ope_b                        integral  32    'hd1                          
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    540                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 560 ns Started: 550 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 570 ns Started: 560 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64 Expr: result==operand_a/operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @973                          
+#   ope_a                        integral  32    'h156                         
+#   ope_b                        integral  32    'h1d2                         
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    560                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 580 ns Started: 570 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 590 ns Started: 580 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67 Expr: result==operand_a|operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @985                          
+#   ope_a                        integral  32    'h96                          
+#   ope_b                        integral  32    'h2                           
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    580                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 600 ns Started: 590 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 610 ns Started: 600 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67 Expr: result==operand_a|operand_b
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @997                          
+#   ope_a                        integral  32    'h52                          
+#   ope_b                        integral  32    'h2e                          
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    600                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 620 ns Started: 610 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61 Expr: result==operand_a+operand_b
+# ** Error: Assertion error.
+#    Time: 630 ns Started: 620 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62 Expr: result==operand_a-operand_b
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_objection.svh(1270) @ 720: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_report_server.svh(847) @ 720: reporter [UVM/REPORT/SERVER] 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :    3
+# UVM_INFO :    4
 # UVM_WARNING :    0
 # UVM_ERROR :    0
-# UVM_FATAL :    1
+# UVM_FATAL :    0
 # ** Report counts by id
 # [RNTST]     1
-# [RUNPHSTIME]     1
+# [TEST_DONE]     1
 # [UVM/RELNOTES]     1
 # [UVMTOP]     1
 # 
-# ** Note: $finish    : H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(135)
-#    Time: 20 ns  Iteration: 52  Region: /uvm_pkg::uvm_task_phase::execute
+# ** Note: $finish    : H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(517)
+#    Time: 720 ns  Iteration: 67  Instance: /top
 # 1
-# Break in Function uvm_pkg/uvm_root::die at H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh line 135
-# End time: 21:58:50 on Apr 03,2024, Elapsed time: 0:01:28
-# Errors: 0, Warnings: 4
+# Break in Task uvm_pkg/uvm_root::run_test at H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh line 517
+quit -sim
+# End time: 12:58:04 on Apr 04,2024, Elapsed time: 0:08:16
+# Errors: 62, Warnings: 4
+do run_cov.do
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+# Start time: 13:11:48 on Apr 04,2024
+# vlog -reportprogress 300 list.svh "+incdir+H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src" 
+# -- Compiling package uvm_pkg
+# -- Compiling package list_svh_unit
+# -- Importing package uvm_pkg
+# ** Warning: alu_tx.sv(22): (vlog-2121) Illegal concatenation of an unsized constant. Will treat it as a 32-bit value.
+# -- Compiling module alu_design
+# -- Compiling interface alu_intfc
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 13:11:51 on Apr 04,2024, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 18 2018
+# Start time: 13:11:51 on Apr 04,2024
+# vopt -reportprogress 300 work.top "+cover=fcbest" -o alu_coverage 
+# 
+# Top level modules:
+# 	top
+# 
+# Analyzing design...
+# -- Loading module top
+# -- Loading interface alu_intfc
+# -- Loading module alu_design
+# Optimizing 6 design-units (inlining 2/3 module instances):
+# -- Inlining interface alu_intfc(fast)
+# -- Inlining module alu_design(fast)
+# -- Optimizing module top(fast)
+# -- Optimizing interface alu_intfc(fast)
+# -- Optimizing package list_svh_unit(fast)
+# ** Warning: alu_tx.sv(22): (vopt-2121) Illegal concatenation of an unsized constant. Will treat it as a 32-bit value.
+# -- Optimizing package uvm_pkg(fast)
+# Optimized design name is alu_coverage
+# End time: 13:11:55 on Apr 04,2024, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 1
+# vsim -coverage alu_coverage -sv_lib C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi -sv_seed 04022924 
+# Start time: 13:11:55 on Apr 04,2024
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_13988\win64_gcc-10.3.0\export_tramp.dll
+# Loading sv_std.std
+# Loading work.uvm_pkg(fast)
+# Loading work.list_svh_unit(fast)
+# ** Note: (vsim-8785) UVM-aware debugging capabilities will be disabled since no compiled "questa_uvm_pkg" can be found.
+# This also means that later if you turn on UVM-aware debugging your debug simulations may have
+# different random seeds from your non-debug simulations.
+# Loading work.top(fast)
+# Loading work.alu_intfc(fast)
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit File: alu_mon.sv Line: 9
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::base_seq File: seq_lib.sv Line: 14
+# ** Warning: (vsim-3764) Stand-alone call to function 'get' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /list_svh_unit::alu_drv File: alu_drv.sv Line: 9
+# Compiling C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_13988\win64_gcc-10.3.0\exportwrapper.c
+# Loading C:/Users/srsre/AppData/Local/Temp\srsre@HARRY_dpi_13988\win64_gcc-10.3.0\vsim_auto_compile.dll
+# Loading C:/questasim64_10.7c/uvm-1.2/win64/uvm_dpi.dll
+# ** Error: (vish-4014) No objects found matching '/top/pif/HANDSHAKE'.
+# Executing ONERROR command at macro ./wave.do line 11
+# ** Error: (vish-4014) No objects found matching '/top/pif/ADD_OPE'.
+# Executing ONERROR command at macro ./wave.do line 12
+# ** Error: (vish-4014) No objects found matching '/top/pif/SUB_OPE'.
+# Executing ONERROR command at macro ./wave.do line 13
+# ** Error: (vish-4014) No objects found matching '/top/pif/MUL_OPE'.
+# Executing ONERROR command at macro ./wave.do line 14
+# ** Error: (vish-4014) No objects found matching '/top/pif/DIV_OPE'.
+# Executing ONERROR command at macro ./wave.do line 15
+# ** Error: (vish-4014) No objects found matching '/top/pif/REM_OPE'.
+# Executing ONERROR command at macro ./wave.do line 16
+# ** Error: (vish-4014) No objects found matching '/top/pif/AND_OPE'.
+# Executing ONERROR command at macro ./wave.do line 17
+# ** Error: (vish-4014) No objects found matching '/top/pif/OR_OPE'.
+# Executing ONERROR command at macro ./wave.do line 18
+# ** Error: (vish-4014) No objects found matching '/top/pif/XOR_OPE'.
+# Executing ONERROR command at macro ./wave.do line 19
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(392) @ 0: reporter [UVM/RELNOTES] 
+# ----------------------------------------------------------------
+# UVM-1.2
+# (C) 2007-2014 Mentor Graphics Corporation
+# (C) 2007-2014 Cadence Design Systems, Inc.
+# (C) 2006-2014 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# (C) 2013-2014 NVIDIA Corporation
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO @ 0: reporter [RNTST] Running test base_test...
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(579) @ 0: reporter [UVMTOP] UVM testbench topology:
+# --------------------------------------------------------------
+# Name                       Type                    Size  Value
+# --------------------------------------------------------------
+# uvm_test_top               base_test               -     @343 
+#   env                      alu_env                 -     @356 
+#     agent                  alu_agent               -     @365 
+#       cov                  alu_cov                 -     @558 
+#         analysis_imp       uvm_analysis_imp        -     @567 
+#       drv                  alu_drv                 -     @520 
+#         rsp_port           uvm_analysis_port       -     @539 
+#         seq_item_port      uvm_seq_item_pull_port  -     @529 
+#       mon                  alu_mon                 -     @549 
+#         ap_port            uvm_analysis_port       -     @578 
+#       sqr                  uvm_sequencer           -     @383 
+#         rsp_export         uvm_analysis_export     -     @392 
+#         seq_item_export    uvm_seq_item_pull_imp   -     @510 
+#         arbitration_queue  array                   0     -    
+#         lock_queue         array                   0     -    
+#         num_last_reqs      integral                32    'd1  
+#         num_last_rsps      integral                32    'd1  
+#     sbd                    alu_sbd                 -     @374 
+#       alu_imp              uvm_analysis_imp        -     @594 
+# --------------------------------------------------------------
+# 
+# ** Error: Assertion error.
+#    Time: 20 ns Started: 10 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 30 ns Started: 20 ns  Scope: top.pif.HANDSHAKE File: alu_intfc.sv Line: 60
+# ** Error: Assertion error.
+#    Time: 30 ns Started: 20 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @627                          
+#   ope_a                        integral  32    'hf5                          
+#   ope_b                        integral  32    'h26c                         
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    0                             
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 50 ns Started: 50 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @661                          
+#   ope_a                        integral  32    'h235                         
+#   ope_b                        integral  32    'h3cb                         
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    40                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 60 ns Started: 50 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 70 ns Started: 60 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @673                          
+#   ope_a                        integral  32    'h1a6                         
+#   ope_b                        integral  32    'h38b                         
+#   ope                          integral  3     'h2                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    60                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 80 ns Started: 70 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 90 ns Started: 80 ns  Scope: top.pif.MUL_OPE File: alu_intfc.sv Line: 63
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @685                          
+#   ope_a                        integral  32    'hb5                          
+#   ope_b                        integral  32    'hf3                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    80                            
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 100 ns Started: 90 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 110 ns Started: 100 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @697                          
+#   ope_a                        integral  32    'h47                          
+#   ope_b                        integral  32    'h288                         
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    100                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 120 ns Started: 110 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 130 ns Started: 120 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @709                          
+#   ope_a                        integral  32    'h203                         
+#   ope_b                        integral  32    'h272                         
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    120                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 140 ns Started: 130 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 150 ns Started: 140 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @721                          
+#   ope_a                        integral  32    'h10f                         
+#   ope_b                        integral  32    'hba                          
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    140                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 160 ns Started: 150 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 170 ns Started: 160 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @733                          
+#   ope_a                        integral  32    'h29c                         
+#   ope_b                        integral  32    'h309                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    160                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 180 ns Started: 170 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 190 ns Started: 180 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @745                          
+#   ope_a                        integral  32    'h8b                          
+#   ope_b                        integral  32    'h2a5                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    180                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 200 ns Started: 190 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 210 ns Started: 200 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @757                          
+#   ope_a                        integral  32    'h91                          
+#   ope_b                        integral  32    'h371                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    200                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 220 ns Started: 210 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 230 ns Started: 220 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @769                          
+#   ope_a                        integral  32    'h111                         
+#   ope_b                        integral  32    'h214                         
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    220                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 240 ns Started: 230 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 250 ns Started: 240 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @781                          
+#   ope_a                        integral  32    'h1ef                         
+#   ope_b                        integral  32    'h1a9                         
+#   ope                          integral  3     'h2                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    240                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 260 ns Started: 250 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 270 ns Started: 260 ns  Scope: top.pif.MUL_OPE File: alu_intfc.sv Line: 63
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @793                          
+#   ope_a                        integral  32    'h1f7                         
+#   ope_b                        integral  32    'hb1                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    260                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 280 ns Started: 270 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 290 ns Started: 280 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @805                          
+#   ope_a                        integral  32    'h27b                         
+#   ope_b                        integral  32    'h387                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    280                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 300 ns Started: 290 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 310 ns Started: 300 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @817                          
+#   ope_a                        integral  32    'h8e                          
+#   ope_b                        integral  32    'h76                          
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    300                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 320 ns Started: 310 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 330 ns Started: 320 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @829                          
+#   ope_a                        integral  32    'h226                         
+#   ope_b                        integral  32    'hb8                          
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    320                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 340 ns Started: 330 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 350 ns Started: 340 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @841                          
+#   ope_a                        integral  32    'ha5                          
+#   ope_b                        integral  32    'h2ed                         
+#   ope                          integral  3     'h5                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    340                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 360 ns Started: 350 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 370 ns Started: 360 ns  Scope: top.pif.AND_OPE File: alu_intfc.sv Line: 66
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @853                          
+#   ope_a                        integral  32    'hf6                          
+#   ope_b                        integral  32    'hca                          
+#   ope                          integral  3     'h4                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    360                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 380 ns Started: 370 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 390 ns Started: 380 ns  Scope: top.pif.REM_OPE File: alu_intfc.sv Line: 65
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @865                          
+#   ope_a                        integral  32    'h1a2                         
+#   ope_b                        integral  32    'hd8                          
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    380                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 400 ns Started: 390 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 410 ns Started: 400 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @877                          
+#   ope_a                        integral  32    'h31b                         
+#   ope_b                        integral  32    'h232                         
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    400                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 420 ns Started: 410 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 430 ns Started: 420 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @889                          
+#   ope_a                        integral  32    'h1e                          
+#   ope_b                        integral  32    'h8a                          
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    420                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 440 ns Started: 430 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 450 ns Started: 440 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @901                          
+#   ope_a                        integral  32    'h246                         
+#   ope_b                        integral  32    'h2ab                         
+#   ope                          integral  3     'h7                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    440                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 460 ns Started: 450 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 470 ns Started: 460 ns  Scope: top.pif.XOR_OPE File: alu_intfc.sv Line: 68
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @913                          
+#   ope_a                        integral  32    'h1eb                         
+#   ope_b                        integral  32    'ha8                          
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    460                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 480 ns Started: 470 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 490 ns Started: 480 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @925                          
+#   ope_a                        integral  32    'h32f                         
+#   ope_b                        integral  32    'h233                         
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    480                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 500 ns Started: 490 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 510 ns Started: 500 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @937                          
+#   ope_a                        integral  32    'h331                         
+#   ope_b                        integral  32    'h109                         
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    500                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 520 ns Started: 510 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 530 ns Started: 520 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @949                          
+#   ope_a                        integral  32    'h324                         
+#   ope_b                        integral  32    'h31                          
+#   ope                          integral  3     'h0                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    520                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 540 ns Started: 530 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 550 ns Started: 540 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @961                          
+#   ope_a                        integral  32    'h3d5                         
+#   ope_b                        integral  32    'hd1                          
+#   ope                          integral  3     'h3                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    540                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 560 ns Started: 550 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 570 ns Started: 560 ns  Scope: top.pif.DIV_OPE File: alu_intfc.sv Line: 64
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @973                          
+#   ope_a                        integral  32    'h156                         
+#   ope_b                        integral  32    'h1d2                         
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    560                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 580 ns Started: 570 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 590 ns Started: 580 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @985                          
+#   ope_a                        integral  32    'h96                          
+#   ope_b                        integral  32    'h2                           
+#   ope                          integral  3     'h6                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    580                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 600 ns Started: 590 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 610 ns Started: 600 ns  Scope: top.pif.OR_OPE File: alu_intfc.sv Line: 67
+# -----------------------------------------------------------------------------
+# Name                           Type      Size  Value                         
+# -----------------------------------------------------------------------------
+# req                            alu_tx    -     @997                          
+#   ope_a                        integral  32    'h52                          
+#   ope_b                        integral  32    'h2e                          
+#   ope                          integral  3     'h1                           
+#   result                       integral  32    'h0                           
+#   begin_time                   time      64    600                           
+#   depth                        int       32    'd2                           
+#   parent sequence (name)       string    3     seq                           
+#   parent sequence (full name)  string    30    uvm_test_top.env.agent.sqr.seq
+#   sequencer                    string    26    uvm_test_top.env.agent.sqr    
+# -----------------------------------------------------------------------------
+# ** Error: Assertion error.
+#    Time: 620 ns Started: 610 ns  Scope: top.pif.ADD_OPE File: alu_intfc.sv Line: 61
+# ** Error: Assertion error.
+#    Time: 630 ns Started: 620 ns  Scope: top.pif.SUB_OPE File: alu_intfc.sv Line: 62
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_objection.svh(1270) @ 720: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_report_server.svh(847) @ 720: reporter [UVM/REPORT/SERVER] 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :    4
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [RNTST]     1
+# [TEST_DONE]     1
+# [UVM/RELNOTES]     1
+# [UVMTOP]     1
+# 
+# ** Note: $finish    : H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh(517)
+#    Time: 720 ns  Iteration: 67  Instance: /top
+# 1
+# Break in Task uvm_pkg/uvm_root::run_test at H:/VLSI_GURU/UVM/UVM_Lib_Files/uvm-1.2/src/base/uvm_root.svh line 517
+coverage report -html -htmldir covhtmlreport -source -details -assert -directive -cvg -code bcefst -threshL 50 -threshH 90
+# Report created in covhtmlreport/index.html
+# Saving coverage database on exit...
+# End time: 13:23:27 on Apr 04,2024, Elapsed time: 0:11:32
+# Errors: 89, Warnings: 3

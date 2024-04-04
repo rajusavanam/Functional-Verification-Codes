@@ -1,0 +1,41 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-w>class</q-w> base_seq <q-w>extends</q-w> uvm_sequence#(alu_tx);
+<a name="2"><q-n>     2  </q-n></a>	alu_tx tx;
+<a name="3"><q-n>     3  </q-n></a>	`uvm_object_utils(base_seq)
+<a name="4"><q-n>     4  </q-n></a>	`NEW_OBJ
+<a name="5"><q-n>     5  </q-n></a>	uvm_phase phase;
+<a name="6"><q-n>     6  </q-n></a>	<q-w>task</q-w> pre_body();
+<a name="7"><q-n>     7  </q-n></a>		phase = get_starting_phase();
+<a name="8"><q-n>     8  </q-n></a>		<q-w>if</q-w>(phase!=<q-w>null</q-w>)<q-w>begin</q-w>
+<a name="9"><q-n>     9  </q-n></a>			phase.raise_objection(<q-w>this</q-w>);
+<a name="10"><q-n>     10  </q-n></a>		<q-w>end</q-w>
+<a name="11"><q-n>     11  </q-n></a>	<q-w>endtask</q-w>
+<a name="12"><q-n>     12  </q-n></a>	<q-w>task</q-w> body();
+<a name="13"><q-n>     13  </q-n></a>		<q-w>int</q-w> count;
+<a name="14"><q-n>     14  </q-n></a>		uvm_config_db#(<q-w>int</q-w>)::get(<q-w>null</q-w>,get_full_name(),<q-l>"COUNT"</q-l>,count);
+<a name="15"><q-n>     15  </q-n></a>		<q-w>repeat</q-w>(count)<q-w>begin</q-w>
+<a name="16"><q-n>     16  </q-n></a>			`uvm_do(req);
+<a name="17"><q-n>     17  </q-n></a>			$<q-v>cast</q-w>(tx,req);
+<a name="18"><q-n>     18  </q-n></a>		<q-w>end</q-w>
+<a name="19"><q-n>     19  </q-n></a>	<q-w>endtask</q-w>
+<a name="20"><q-n>     20  </q-n></a>	<q-w>task</q-w> post_body();
+<a name="21"><q-n>     21  </q-n></a>		<q-w>if</q-w>(phase!=<q-w>null</q-w>)<q-w>begin</q-w>
+<a name="22"><q-n>     22  </q-n></a>			phase.drop_objection(<q-w>this</q-w>);
+<a name="23"><q-n>     23  </q-n></a>		<q-w>end</q-w>
+<a name="24"><q-n>     24  </q-n></a>	<q-w>endtask</q-w>
+<a name="25"><q-n>     25  </q-n></a><q-w>endclass</q-w>
+</pre>
+</tt>
+
+  
+</body>
+</html>

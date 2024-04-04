@@ -15,11 +15,13 @@ alu_design dut(.clk_i(pif.clk_i),
 				.result(pif.result)
 		);
 
+
 always begin
 	#5 clk = 0;
 	#5 clk = 1;
 end
 
+alu_env env;
 task reset_signals();
 	pif.operand_a=0;
 	pif.operand_b=0;
@@ -36,7 +38,6 @@ initial begin
 	uvm_config_db#(int)::set(null,"*","COUNT",alu_common::count);
 end
 initial begin
-	#20;
 	run_test("base_test");
 end
 endmodule

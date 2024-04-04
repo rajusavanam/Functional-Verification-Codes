@@ -1,0 +1,18 @@
+var g_sourceLines = [
+'class alu_sbd extends uvm_scoreboard;',
+'	uvm_analysis_imp#(alu_tx,alu_sbd)alu_imp;',
+'	`uvm_component_utils(alu_sbd)',
+'	`NEW_COMP',
+'',
+'	function void build_phase(uvm_phase phase);',
+'		super.build_phase(phase);',
+'		alu_imp = new("alu_imp",this);',
+'	endfunction',
+'',
+'	function void write(alu_tx tx);',
+'	//',
+'	endfunction',
+'endclass',
+''
+];
+countinueBuildStmtTable(g_sourceLines);

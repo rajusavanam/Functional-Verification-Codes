@@ -1,0 +1,40 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-w>class</q-w> alu_tx <q-w>extends</q-w> uvm_sequence_item;
+<a name="2"><q-n>     2  </q-n></a>	
+<a name="3"><q-n>     3  </q-n></a>	<q-w>rand</q-w> <q-w>int</q-w> ope_a;
+<a name="4"><q-n>     4  </q-n></a>	<q-w>rand</q-w> <q-w>int</q-w> ope_b;
+<a name="5"><q-n>     5  </q-n></a>	<q-w>rand</q-w> <q-w>logic</q-w> [2:0]ope;
+<a name="6"><q-n>     6  </q-n></a>	<q-w>int</q-w> result;
+<a name="7"><q-n>     7  </q-n></a>	
+<a name="8"><q-n>     8  </q-n></a>	`uvm_object_utils_begin(alu_tx)
+<a name="9"><q-n>     9  </q-n></a>		`uvm_field_int(ope_a,UVM_ALL_ON);
+<a name="10"><q-n>     10  </q-n></a>		`uvm_field_int(ope_b,UVM_ALL_ON);
+<a name="11"><q-n>     11  </q-n></a>		`uvm_field_int(ope,UVM_ALL_ON);
+<a name="12"><q-n>     12  </q-n></a>		`uvm_field_int(result,UVM_ALL_ON);
+<a name="13"><q-n>     13  </q-n></a>	`uvm_object_utils_end
+<a name="14"><q-n>     14  </q-n></a>	
+<a name="15"><q-n>     15  </q-n></a>	`NEW_OBJ
+<a name="16"><q-n>     16  </q-n></a>
+<a name="17"><q-n>     17  </q-n></a>	<q-w>constraint</q-w> operands{
+<a name="18"><q-n>     18  </q-n></a>		ope_a <q-w>inside</q-w> {[0:1000]} &amp;&amp; ope_b <q-w>inside</q-w> {[0:1000]};}
+<a name="19"><q-n>     19  </q-n></a>	<q-w>constraint</q-w> ope_c{ 
+<a name="20"><q-n>     20  </q-n></a>			<q-m>//if(ope inside {1,3,4}) {</q-m>
+<a name="21"><q-n>     21  </q-n></a>			<q-m>//	ope_a &gt;= ope_b; }</q-m>
+<a name="22"><q-n>     22  </q-n></a>			<q-w>if</q-w>(ope == {4}) { ope_b != 0; }
+<a name="23"><q-n>     23  </q-n></a>			}
+<a name="24"><q-n>     24  </q-n></a><q-w>endclass</q-w>
+</pre>
+</tt>
+
+  
+</body>
+</html>

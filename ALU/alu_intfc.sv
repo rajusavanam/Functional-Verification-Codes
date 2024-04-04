@@ -28,10 +28,10 @@ interface alu_intfc(input logic clk_i,rst_i);
 	endclocking
 
 	// Assertions
-	property handshake(valid_i,ready_o);
-		@(posedge clk_i) valid_i ==1 |-> ##1 ready_o==1;
+	property handshake;
+		@(posedge clk_i) valid_i ==1 |=> ready_o==1;
 	endproperty
-	property add_operation(operand_a,operand_b,operation);
+	property add_operation;
 		@(posedge clk_i) (operation==0) |=> (result== operand_a+operand_b);
 	endproperty
 
@@ -57,8 +57,8 @@ interface alu_intfc(input logic clk_i,rst_i);
 		@(posedge clk_i) (operation==7) |=> (result== operand_a^operand_b);
 	endproperty
 
-	HANDSHAKE:assert property(handshake(valid_i,ready_o));
-	ADD_OPE:assert property(add_operation(operand_a,operand_b,operation));
+	HANDSHAKE:assert property(handshake);
+	ADD_OPE:assert property(add_operation);
 	SUB_OPE:assert property(sub_operation(operand_a,operand_b,operation));
 	MUL_OPE:assert property(mul_operation(operand_a,operand_b,operation));
 	DIV_OPE:assert property(div_operation(operand_a,operand_b,operation));

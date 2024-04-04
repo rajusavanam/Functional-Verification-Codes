@@ -1,0 +1,38 @@
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Questa Coverage Report</title>
+  <link rel="StyleSheet" media="screen" href="../css/hdl2html.css"/>
+</head>
+<body id="hdl2html">
+  <tt>
+<pre>
+<a name="1"><q-n>     1  </q-n></a><q-w>class</q-w> base_test <q-w>extends</q-w> uvm_test;
+<a name="2"><q-n>     2  </q-n></a>	`uvm_component_utils(base_test)
+<a name="3"><q-n>     3  </q-n></a>	`NEW_COMP
+<a name="4"><q-n>     4  </q-n></a>
+<a name="5"><q-n>     5  </q-n></a>	alu_env env;
+<a name="6"><q-n>     6  </q-n></a>
+<a name="7"><q-n>     7  </q-n></a>	<q-w>function</q-w> <q-w>void</q-w> build_phase(uvm_phase phase);
+<a name="8"><q-n>     8  </q-n></a>		env = alu_env::type_id::create(<q-l>"env"</q-l>,<q-w>this</q-w>);
+<a name="9"><q-n>     9  </q-n></a>	<q-w>endfunction</q-w>
+<a name="10"><q-n>     10  </q-n></a>
+<a name="11"><q-n>     11  </q-n></a>	<q-w>task</q-w> run_phase(uvm_phase phase);
+<a name="12"><q-n>     12  </q-n></a>		base_seq seq = base_seq::type_id::create(<q-l>"seq"</q-l>);
+<a name="13"><q-n>     13  </q-n></a>		phase.raise_objection(<q-w>this</q-w>);
+<a name="14"><q-n>     14  </q-n></a>		seq.start(env.agent.sqr);
+<a name="15"><q-n>     15  </q-n></a>		phase.phase_done.set_drain_time(<q-w>this</q-w>,100);
+<a name="16"><q-n>     16  </q-n></a>		phase.drop_objection(<q-w>this</q-w>);	
+<a name="17"><q-n>     17  </q-n></a>	<q-w>endtask</q-w>
+<a name="18"><q-n>     18  </q-n></a>
+<a name="19"><q-n>     19  </q-n></a>	<q-w>function</q-w> <q-w>void</q-w> end_of_elaboration_phase(uvm_phase phase);
+<a name="20"><q-n>     20  </q-n></a>		uvm_top.print_topology();
+<a name="21"><q-n>     21  </q-n></a>	<q-w>endfunction</q-w>
+<a name="22"><q-n>     22  </q-n></a><q-w>endclass</q-w>
+</pre>
+</tt>
+
+  
+</body>
+</html>
