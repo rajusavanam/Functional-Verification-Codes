@@ -357,5 +357,4 @@ Step 2:	Now start developing all the class components, interfaces and top module
 				- Select all the wave signals and save them using Ctrl+S as wave.do file
 				- Now comment the add wave line in the run.do file and write command 
 					- do wave.do
-				- Now re-run the simulation once and you are now able to see the assertions in the waveform
-
+				- Now re-run the simulation once and you are now able to see the assertions in the waveforms
